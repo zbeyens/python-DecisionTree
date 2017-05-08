@@ -125,7 +125,7 @@ def findBestAttr(data, attributes, target):
     """
     targetEntropy = calcEntropy(data, attributes, target)
     bestAttr = ""
-    maxGain = 0
+    maxGain = -1
     for attr in attributes:
         if attr == target:
             continue
