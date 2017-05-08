@@ -1,0 +1,7 @@
+The credit card information are continuous, so it cannot be used easily for ID3
+
+We first tried to discretise the data using quartiles (having quartiles containing the same amount of data).
+We then tried to discretise using standard deviation, which restricted the problematic lines to 4 values (19 positive lines having same values as negative lines)
+
+We have many more negative entries (284315) than positive ones (492). To have values that are better useable for ID3 we used undersampling (selecting 492 random entries from the negative entries).
+Without undersampling, we have different values. Try to launch ID3 on both.

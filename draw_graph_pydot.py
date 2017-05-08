@@ -9,7 +9,7 @@ menu = {'dinner':
                             'caeser':'bad',
                             'italian':'average'}
                    },
-             'pork':'bad'}
+             'pork':'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}
         }
 
 def draw(parent_name, child_name):
