@@ -1,6 +1,6 @@
 from tkinter import *
-gw = 1000
-gh = 800
+gw = 8000
+gh = 5000
 
 
 def findwidth(root,prof,depth):
@@ -22,39 +22,47 @@ def finddepth(root,prof,depth=0):
 			
 	return max(values)+1
 	
-
-def drawnode(root,arrangement,value,prof,depth=0):
+def drawnode(arrangement,value,prof,c,depth):
 	x0 = 50
-	ww = 900
+	ww = gw-2*x0
 	y0 = 20
-	hh = 750
+	hh = gh-2*y0
 	w=prof[depth]
 	xp =  x0+ ww/prof[depth-1]*(arrangement[depth-1]-1)
 	yp =  y0+ hh/h*(depth-1)
 	x = x0+ ww/w*arrangement[depth]
 	arrangement[depth]+=1
 	y = y0+ hh/h*depth
-	
-	canvas.create_line(xp,yp,x,y)
-	canvas.create_text((x,y),text=str(value),anchor=CENTER)
-	
+	if(depth!=0):
+		border = len(str(value))*7
+		canvas.create_text((x,y),text=str(value),anchor=CENTER,fill=c)
+		canvas.tag_lower(canvas.create_oval(x-border,y-10,x+border,y+10,fill="WHITE",outline="WHITE"))
+		canvas.tag_lower(canvas.create_line(xp,yp,x,y,fill="GREY"))
+def drawtree(root,arrangement,value,prof,depth=0):
+	if(isinstance(root,dict)):
+		c = "black"
+	else:
+		print(root)
+		c = ["red","green"][root]
+	drawnode(arrangement,value,prof,c,depth)
 	if(isinstance(root,dict)):
 		for a in root:
-			drawnode(root[a],arrangement,a,prof,depth+1)
-	
+			drawtree(root[a],arrangement,a,prof,depth+1)
 
-def drawtree(root):
+		
+
+def drawtree_start(root):
 	#global w
 	global h
 	prof = []
 	#w=findwidth(root)
 	h=finddepth(root,prof)
 	w=max(prof)
-	arrangements = [0]*h
+	arrangements = [0.5]*h
 	print("Width",w,"; Height",h)
 	
 	for i in root:
-		drawnode(root,arrangements,i,prof)
+		drawtree(root,arrangements,i,prof)
 	
 	
 
@@ -62,8 +70,18 @@ def start(root):
 	global canvas
 	master = Tk()
 
-	canvas = Canvas(master, width=gw, height=gh)
-	canvas.pack()
+
+	canvas = Canvas(master, width=1000, height=800,scrollregion=(0,0,gw,gh))
+	frame = master
+	hbar=Scrollbar(frame,orient=HORIZONTAL)
+	hbar.pack(side=BOTTOM,fill=X)
+	hbar.config(command=canvas.xview)
+	vbar=Scrollbar(frame,orient=VERTICAL)
+	vbar.pack(side=RIGHT,fill=Y)
+	vbar.config(command=canvas.yview)
+	canvas.config(width=1000,height=800)
+	canvas.config(xscrollcommand=hbar.set, yscrollcommand=vbar.set)
+	canvas.pack(side=LEFT,expand=True,fill=BOTH)
 
 	"""
 	w.create_line(0, 0, 200, 100)
@@ -71,5 +89,15 @@ def start(root):
 
 	w.create_rectangle(50, 25, 150, 75, fill="blue")
 	"""
-	drawtree(root)
+	drawtree_start(root)
 	mainloop()
+	
+if __name__=="__main__":
+	
+	import graphtree_undersampled_generated
+	start(graphtree_undersampled_generated.tree)
+	
+	import graphtree_discretised_generated
+	start(graphtree_discretised_generated.tree)
+	
+	

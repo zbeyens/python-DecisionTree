@@ -1,5 +1,4 @@
 from parse_credits import parse_credits
-from tkintertree import *
 import DecisionTree
 
 def main():
@@ -8,7 +7,8 @@ def main():
     # file = open('SoybeanTraining.csv')
 
     # IMPORTANT: Change this variable too change target attribute
-    """target = "Class"
+    """
+    target = "Class"
     data = [
         ["Hair", "Height", "Weight", "Lotion", "Class"],
         ["Blonde", "Average", "Light", "No", "Burned"],
@@ -22,9 +22,10 @@ def main():
     ]
 
     attributes = data[0]
-    data.pop(0)"""
-    attributes, data = parse_credits("creditcard_undersampled.csv")
-    #attributes, data = parse_credits("creditcard_simplified.csv")
+    data.pop(0)
+    """
+    #attributes, data = parse_credits("creditcard_undersampled.csv")
+    attributes, data = parse_credits("creditcard_simplified.csv")
     target = attributes[-1]
     
 
@@ -37,9 +38,11 @@ def main():
     graph = pydot.Dot(graph_type='graph')
     visit(tree)
     graph.write_png('example1_graph.png')"""
-    start(tree)
-
-
+    f=open("graphtree_discretised_generated.py","w")
+    
+    f.write("tree = "+repr(tree))
+    f.write("\n")
+    f.close()
 
 if __name__ == '__main__':
     main()
