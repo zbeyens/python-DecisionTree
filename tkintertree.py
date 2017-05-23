@@ -93,11 +93,10 @@ def start(root):
 	mainloop()
 	
 if __name__=="__main__":
+	import _Output_.graphtree_undersampled_generated as undersampled
+	start(undersampled.tree)
 	
-	import graphtree_undersampled_generated
-	start(graphtree_undersampled_generated.tree)
-	
-	import graphtree_discretised_generated
-	start(graphtree_discretised_generated.tree)
+	import _Output_.graphtree_discretised_generated as discretised
+	start(discretised.tree)
 	
 	

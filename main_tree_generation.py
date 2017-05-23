@@ -1,5 +1,6 @@
-from parse_credits import parse_credits
-import DecisionTree
+from _Utilities_.parse_credits import parse_credits
+from _DecisionTree_ import DecisionTree
+from os import sep
 
 def main():
     # Insert input file
@@ -24,7 +25,7 @@ def main():
     attributes = data[0]
     data.pop(0)
     """
-    attributes, data = parse_credits("creditcard_undersampled.csv")
+    attributes, data = parse_credits("_Data_"+sep+"creditcard_undersampled.csv")
     #attributes, data = parse_credits("creditcard_simplified.csv")
     target = attributes[-1]
     
@@ -38,7 +39,7 @@ def main():
     graph = pydot.Dot(graph_type='graph')
     visit(tree)
     graph.write_png('example1_graph.png')"""
-    f=open("graphtree_generated.py","w")
+    f=open("_Output_"+sep+"graphtree_generated.py","w")
     
     f.write("tree = "+repr(tree))
     f.write("\n")

@@ -1,4 +1,4 @@
-def parse_credits(filename="creditcard_simplified.csv"):
+def parse_credits(filename="_Data_/creditcard_simplified.csv"):
 	f = open(filename)
 	attributes = f.readline().strip().split(",")
 	
