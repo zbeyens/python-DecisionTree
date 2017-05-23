@@ -1,14 +1,13 @@
 from _Utilities_.parse_credits import parse_credits
 from _DecisionTree_ import DecisionTree
 from os import sep
+from tkintertree import start
 
+"""Ouvre un fichier donné, lance le générateur de tree, 
+créé un .py qui contient l'arbre"""
 def main():
-    # Insert input file
-    # IMPORTANT: Change this file path to change training data
-    # file = open('SoybeanTraining.csv')
-
-    # IMPORTANT: Change this variable too change target attribute
     """
+	Exemple basique:
     target = "Class"
     data = [
         ["Hair", "Height", "Weight", "Lotion", "Class"],
@@ -34,16 +33,13 @@ def main():
     tree = DecisionTree.createTree(data, attributes, target)
     print(tree)
     print("generated decision tree")
-    """
-    global graph
-    graph = pydot.Dot(graph_type='graph')
-    visit(tree)
-    graph.write_png('example1_graph.png')"""
     f=open("_Output_"+sep+"graphtree_generated.py","w")
+	
     
     f.write("tree = "+repr(tree))
     f.write("\n")
     f.close()
-
+    
+    start(tree)#affiche l'arbre donné
 if __name__ == '__main__':
     main()

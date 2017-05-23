@@ -1,5 +1,5 @@
 from tkinter import *
-gw = 8000
+gw = 8000 #taille réelle du graphe (on scrolle dedans)
 gh = 5000
 
 
