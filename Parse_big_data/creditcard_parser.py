@@ -1,22 +1,28 @@
 import statistics
 from math import ceil
 
-def histogram(dataset,height=8,width=80,full="X",empty=" "):
+def histogram(dataset,height=8,width=80,full="X",empty="_"):
 	"""Given a list of data, draws an histogram 
 	of given width and height with given characters
 	Returns if histogram was succesful"""
 	mv = min(dataset)
 	Mv = max(dataset)
-
+	print("[",mv,":",Mv,"]")
 	if(mv==Mv):
 		print(elem,"has no interval")
 		return False
-		
-	counter = [0]*width
-	for n in dataset:
-		counter[int((n-mv)*float(width-1)/(Mv-mv))]+=1
+	if(width!=None):
+		counter = [0]*width
+		for n in dataset:
+			counter[int((n-mv)*float(width-1)/(Mv-mv))]+=1
+		#print("Biggest class size:",max(counter))
+	else:
+		data = sorted(set(dataset))
+		counter = len(data)*[0]
+		for n in dataset:
+			counter[data.index(n)]+=1
+			
 	mc = max(counter)
-	#print("Biggest class size:",max(counter))
 	for i in range(height):
 		print("".join((height-val*height/mc < i+1) and full or empty for val in counter))
 	print()  
@@ -42,13 +48,13 @@ def parse_database(noisy=True):
 		line = line.split(",")
 		line = [float(x) for x in line]
 		for i, elem in enumerate(line):
-			database[i].append(elem)
+			database[i].append(elem) 
 		if(len(database[0])>=maxlines):
 			break
 	f.close()
 	if(noisy):
 		print("There are",len(database[0]),"data")
-	
+	is_integer = []
 	for i, elem in enumerate(classes):
 		#lower = 25/100
 		#upper = 75/100
@@ -62,12 +68,38 @@ def parse_database(noisy=True):
 			if(not histogram(database[i])): #dataset
 				continue
 				
+		if(elem=="Time"):
+			continue
 		if( elem=="Class"):
 			continue
-		for j in range(len(database[i])):
-			database[i][j]=int(ceil((database[i][j]-mev)/dev))
+		if(elem=="Amount"):
+			classification = [5,15,50,100,500,1000,5000,10000,50000,100000,1000000,9999999999999999]
+			for index,elem in enumerate(database[i]):
+				a = database[i][index]
+				if(a==int(a)):
+					is_integer.append(1) #integer amount
+				else:
+					is_integer.append(0) #floating amount
+				for uplim in classification:
+					if a<uplim:
+						a = uplim
+						break
+				database[i][index] = a
+				
+				
+			"""if(noisy): 
+				down = sorted(database[i])
+				mid = statistics.median(down)
+				histogram(down[:down.index(mid)])
+				"""
+		else:
+			for j in range(len(database[i])):
+				database[i][j]=int(ceil((database[i][j]-mev)/dev))
+				if(database[i][j])>3:
+					database[i][j]=4
+				if(database[i][j])<-3:
+					database[i][j]=-4
 			
-		
 		"""lbi = int(len(dataset)*lower) #lower bound index
 		ubi = int(len(dataset)*upper) #upper bound index
 		
@@ -91,17 +123,21 @@ def parse_database(noisy=True):
 				
 		if(noisy): 
 			print("Histogram after discretisation:")
-			if(not histogram(database[i])):
+			if(not histogram(database[i],width=None)):
 				continue
 			ldat = set(database[i])
 			print(len(ldat),"different values")
+	
+	
+	database = database[1:-1]+[is_integer]+[database[-1]]
+	classes = classes[1:-1]+["Integer_amount"]+[classes[-1]]
 	return classes,database
 
 def main():
-	classes, database = parse_database()
+	classes, database = parse_database(noisy=True)
 	#Note: it could be interesting to shift database from i;j to j;i 
 	#Since we want to select specific lines 
-	f = open("creditcard_simplified.csv","w")
+	f = open("creditcard_discretised.csv","w")
 	f.write(",".join((x for x in classes)))
 	f.write("\n")
 	for i in range(len(database[0])):
