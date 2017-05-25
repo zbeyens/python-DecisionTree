@@ -7,34 +7,15 @@ from tkintertree import start
 créé un .py qui contient l'arbre"""
 
 def main():
-	"""
-	Exemple basique:
-	target = "Class"
-	data = [
-		["Hair", "Height", "Weight", "Lotion", "Class"],
-		["Blonde", "Average", "Light", "No", "Burned"],
-		["Blonde", "Tall", "Average", "Yes", "Not burned"],
-		["Brown", "Short", "Average", "Yes", "Not burned"],
-		["Blonde", "Short", "Average", "No", "Burned"],
-		["Red", "Average", "Heavy", "No", "Burned"],
-		["Brown", "Tall", "Heavy", "No", "Not burned"],
-		["Brown", "Average", "Heavy", "No", "Not burned"],
-		["Blonde", "Short", "Light", "Yes", "Not burned"],
-	]
-
-	attributes = data[0]
-	data.pop(0)
-	"""
 	target = "Class"
 	##############
 	name = "creditcard_undersampled"
-	
 	attributes, data = parse_credits("_Data_"+sep+name+".csv")
 	
 	tree = DecisionTree.createTree(data, attributes, target)
 	print("Generated decision tree")
 	print(tree)
-	f=open("_Output_"+sep+name+" graphtree_generated.py","w")
+	f=open("_Output_"+sep+name+"_graphtree_generated.py","w")
 	f.write("tree = "+repr(tree))
 	f.write("\n")
 	f.close()
@@ -43,13 +24,12 @@ def main():
 	
 	############
 	name = "creditcard_discretised"
-	
 	attributes, data = parse_credits("_Data_"+sep+name+".csv")
 	
 	tree = DecisionTree.createTree(data, attributes, target)
 	print("Generated decision tree")
 	print(tree)
-	f=open("_Output_"+sep+name+" graphtree_generated.py","w")
+	f=open("_Output_"+sep+name+"_graphtree_generated.py","w")
 	f.write("tree = "+repr(tree))
 	f.write("\n")
 	f.close()
