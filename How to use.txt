@@ -1,0 +1,13 @@
+python generate_tree_main1.py
+	Lancer generate_tree_main1.py pour appeller ID3 sur les dataset de crédit card
+from tkintertree import start
+start(tree)
+	Appeler start de tkintertree.py avec un arbre de décision pour l'afficher
+python tkintertree.py
+	Lancer tkintertree.py pour deux exemples rapides sur les données de crédit card
+
+TODO:
+Créer generate_tree_main2.py qui appelle ID3 sur les dataset de meurtres
+(probablement écrire un parseur séparé qui ne garde que les infromations importantes)
+Créer test.py qui charge les arbres faits et les teste sur leur dataset
+Changer les dataset utilisés pour lé création d'arbre et le test selon la théorie
