@@ -57,7 +57,7 @@ def resample_and_separate(attributes,database,target):
 	positive_testing = positive[keep:]
 	
 	negative_training = negative[:keep]
-	negative_testing1 = negative[keep:len(positive_testing)] #Undersampled negatives also
+	negative_testing1 = negative[keep:len(positive)] #Undersampled negatives also
 	negative_testing2 = negative[keep:] #All the remaining negatives
 	
 	negative_undersampled = sample(negative,len(positive))
