@@ -9,7 +9,7 @@ créé un .py qui contient l'arbre"""
 def main():
 	target = "Class"
 	##############
-	name = "creditcard_undersampled"
+	name = "training_set"
 	attributes, data = parse_credits("_Data_"+sep+name+".csv")
 	
 	tree = DecisionTree.createTree(data, attributes, target)

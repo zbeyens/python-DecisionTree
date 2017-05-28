@@ -93,10 +93,11 @@ def start(root):
 	mainloop()
 	
 if __name__=="__main__":
-	import _Output_.creditcard_discretised_graphtree_generated as discretised
+	"""import _Output_.creditcard_discretised_graphtree_generated as discretised
 	start(discretised.tree)
 	
 	import _Output_.creditcard_undersampled_graphtree_generated as undersampled
-	start(undersampled.tree)
+	start(undersampled.tree)"""
 	
-	
+	import _Output_.training_set_graphtree_generated as id3
+	start(id3.tree)

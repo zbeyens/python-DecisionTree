@@ -100,30 +100,37 @@ def test_tree(tree,classes,target,dataset):
 					legit_total+=1
 				else:
 					frauds_total+=1
+				
 	print("RESULTS======")
 	print("Total accuracy:",int(round(total_correct/len(dataset)*100)),"%")
-	print("Frauds detection:",int(round(frauds_correct/frauds_total*100)),"%")
-	print("Legit detection:",int(round(legit_correct/legit_total*100)),"%")
+	print("Successful Frauds detection:",int(round(frauds_correct/frauds_total*100)),"%")
+	print("Successful Legit detection:",int(round(legit_correct/legit_total*100)),"%")
+	#print("Accuracy of Frauds detection:",int(round(frauds_correct/frauds_total*100)),"%")
+	#print("Accuracy of Legit detection:",int(round(legit_correct/legit_total*100)),"%")
 	print("Legit",legit_total)
 	print("Fraud",frauds_total)
 	print(len(error_lines),"errors")
 	
 
 if __name__ == "__main__":
-	filename = "creditcard_discretised"
-	attributes, discretised_data = parse_credits("_Data_"+sep+filename+".csv")
-	import _Output_.creditcard_discretised_graphtree_generated as discretised
+	filename = "validation_set_extended"
+	attributes, validation_set_extended = parse_credits("_Data_"+sep+filename+".csv")
+	#import _Output_.creditcard_discretised_graphtree_generated as discretised
 	
-	filename = "creditcard_undersampled"
-	attributes, undersampled_data = parse_credits("_Data_"+sep+filename+".csv")
-	import _Output_.creditcard_undersampled_graphtree_generated as undersampled
+	filename = "validation_set_undersampled"
+	attributes, validation_set_undersampled = parse_credits("_Data_"+sep+filename+".csv")
+	import _Output_.training_set_graphtree_generated as undersampled
 	
-	print("We have a biaised dataset of",len(discretised_data),\
-	"and balanced sub-samples of",len(undersampled_data))
+	"""print("We have a biaised dataset of",len(discretised_data),\
+	"and balanced sub-samples of",len(undersampled_data))"""
 	
-	print("Trying to use total tree (biaised) on total data (self-data)")
-	test_tree(discretised.tree,attributes,"Class",discretised_data)
-	print("Using undersampled tree (balanced) on undersample of data (self-data)")
+	"""print("Trying to use total tree (biaised) on total data (self-data)")
+	test_tree(discretised.tree,attributes,"Class",discretised_data)"""
+	"""print("Using undersampled tree (balanced) on undersample of data (self-data)")
 	test_tree(undersampled.tree,attributes,"Class",undersampled_data)
 	print("Using undersampled tree (balanced) on total data")
-	test_tree(undersampled.tree,attributes,"Class",discretised_data)
+	test_tree(undersampled.tree,attributes,"Class",discretised_data)"""
+	print("Using undersampled tree (balanced) on extended data")
+	test_tree(undersampled.tree,attributes,"Class",validation_set_extended)
+	print("Using undersampled tree (balanced) on undersampled data")
+	test_tree(undersampled.tree,attributes,"Class",validation_set_undersampled)
