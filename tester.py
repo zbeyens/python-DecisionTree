@@ -4,7 +4,6 @@ from os import sep
 def majority_answer(tree):
 	#Explore l'arbre et renvoie la valeur majoritaire
 	#Pondérée par la profondeur et le nombre d'enfants
-	level = 0
 	to_explore = [(tree,1)]
 	true = 0
 	false = 0
