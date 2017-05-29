@@ -21,7 +21,7 @@ def main():
     f.write("\n")
     f.close()
 
-    start(tree)  # affiche l'arbre donné
+    start(tree,target_values = ("Male","Female"),dimensions=(1000,500))  # affiche l'arbre donné
 
 if __name__ == '__main__':
     main()

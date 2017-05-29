@@ -1,7 +1,7 @@
 from tkinter import *
+TARGET_VALUES = []
 gw = 8000  # taille réelle du graphe (on scrolle dedans)
 gh = 5000
-
 
 def findwidth(root, prof, depth):
     values = [1]
@@ -48,7 +48,7 @@ def drawtree(root, arrangement, value, prof, depth=0):
         c = "black"
     else:
         print(root)
-        c = ["red", "green"][root]
+        c = ["red", "green"][TARGET_VALUES.index(root)]
     drawnode(arrangement, value, prof, c, depth)
     if(isinstance(root, dict)):
         for a in root:
@@ -69,8 +69,13 @@ def drawtree_start(root):
         drawtree(root, arrangements, i, prof)
 
 
-def start(root):
+def start(root,target_values=(0,1),dimensions=(8000,5000)):
+    global TARGET_VALUES
     global canvas
+    global gw
+    global gh
+    TARGET_VALUES = target_values
+    gw,gh = dimensions
     master = Tk()
 
     canvas = Canvas(master, width=1000, height=800,
