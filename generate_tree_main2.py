@@ -10,7 +10,7 @@ créé un .py qui contient l'arbre"""
 def main():
     target = "Victim Sex"
     ##############
-    name = "training_set2"
+    name = "training_set2_full"
     attributes, data = parse_credits("_Data_" + sep + name + ".csv")
 
     tree = DecisionTree.createTree(data, attributes, target)
@@ -21,7 +21,7 @@ def main():
     f.write("\n")
     f.close()
 
-    start(tree,target_values = ("Male","Female"),dimensions=(1000,500))  # affiche l'arbre donné
+    start(tree,target_values = ("Male","Female","Unknown"),dimensions=(1000,500))  # affiche l'arbre donné
 
 if __name__ == '__main__':
     main()

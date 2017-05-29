@@ -48,7 +48,7 @@ def drawtree(root, arrangement, value, prof, depth=0):
         c = "black"
     else:
         print(root)
-        c = ["red", "green"][TARGET_VALUES.index(root)]
+        c = ["red", "green", "yellow", "blue"][TARGET_VALUES.index(root)]
     drawnode(arrangement, value, prof, c, depth)
     if(isinstance(root, dict)):
         for a in root:
@@ -69,7 +69,7 @@ def drawtree_start(root):
         drawtree(root, arrangements, i, prof)
 
 
-def start(root,target_values=(0,1),dimensions=(8000,5000)):
+def start(root,target_values=(0,1),dimensions=(1000,800)):
     global TARGET_VALUES
     global canvas
     global gw

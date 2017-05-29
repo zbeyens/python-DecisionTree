@@ -2,12 +2,11 @@ from _Utilities_.parse_credits import parse_credits
 from os import sep
 
 
-def majority_answer(tree):
+def majority_answer(tree, target_values):
     # Explore l'arbre et renvoie la valeur majoritaire
     # Pondérée par la profondeur et le nombre d'enfants
     to_explore = [(tree, 1)]
-    true = 0
-    false = 0
+    target_count = [0 for x in target_values]
     while(to_explore):
         tree, level = to_explore.pop()
         level /= len(tree)
@@ -16,37 +15,24 @@ def majority_answer(tree):
             if(isinstance(subtree, dict)):
                 to_explore.append((subtree, level))
             else:
-                if(subtree == 0):
-                    false += level
-                elif(subtree == 1):
-                    true += level
-                else:
-                    print("Big error: no answer")
-                    print(subtree)
-    if not(abs(true + false - 1) <= 0.0000001):
+                target_count[target_values.index(subtree)]+=level
+    if not(abs(sum(target_count) - 1) <= 0.0000001):
         # Juste pour vérifier que leur somme fasse bien 1
-        print("T:", true, "F:", false, "T+F:", true + false)
-    if(true > false):
-        return 1
-    else:
-        return 0
+        print((str(target_values[i])+":"+str(target_count[i]) for i in range(len(target_values))))
+        print(sum(target_count))
+    majo = max(target_count)
+    return target_values[target_count.index(majo)]
 
 
 def test_tree(tree, classes, target, dataset):
     total_correct = 0
-    frauds_total = 0
-    legit_total = 0
-    frauds_correct = 0
-    legit_correct = 0
     error_lines = []
 
-    detected_fraud = 0
-    correctly_detected_fraud = 0
-
-    detected_normal = 0
-    undetected_fraud = 0
-
     target_id = classes.index(target)
+    target_values = sorted(set(line[target_id] for line in dataset) )
+    total_target_counts = [0 for x in target_values]
+    correct_target_counts = [0 for x in target_values]
+    print(target_values)
 
     # Dans l'arbre: legit = 0
     # Dans les data: legit = 0
@@ -83,7 +69,7 @@ def test_tree(tree, classes, target, dataset):
                     else:
                         class_name = next_tree
                 except(KeyError):
-                    class_name = majority_answer(next_tree)
+                    class_name = majority_answer(next_tree,target_values)
                     # print("Must go with majority:",class_value)
                     # print(next_tree)
                     # print(class_value)
@@ -92,42 +78,36 @@ def test_tree(tree, classes, target, dataset):
                 # pas de sous-arbre correspondant: réponse!
                 answer = class_name
                 found = True
-                real_answer = line[classes.index(target)]
-                if(answer != 0 and answer != 1):
-                    print("Error, answer is not 0 or 1")
+                if not(answer in target_values):
+                    print("Error, answer is not target")
                     print("Answer is:", answer)
+                real_answer = line[classes.index(target)]
+                answer_id = target_values.index(answer)
+                real_answer_id = target_values.index(real_answer)
 
                 if(real_answer == answer):
                     total_correct += 1
-                    if(real_answer == "Female"):
-                        legit_correct += 1
-                    else:
-                        frauds_correct += 1
+                    correct_target_counts[real_answer_id] += 1
                 else:
                     error_lines.append(line_index)
                     # print(line)
-                if(real_answer == 0):
-                    legit_total += 1
-                else:
-                    frauds_total += 1
+                total_target_counts[answer_id] += 1
 
     print("RESULTS======")
     print("Total accuracy:", int(round(total_correct / len(dataset) * 100)), "%")
-    print("Successful Male detection:", int(
-        round(frauds_correct / frauds_total * 100)), "%")
-    print("Successful Female detection:", int(
-        round(legit_correct / legit_total * 100)), "%")
-    # print("Accuracy of Frauds detection:",int(round(frauds_correct/frauds_total*100)),"%")
-    # print("Accuracy of Legit detection:",int(round(legit_correct/legit_total*100)),"%")
-    print("Female", legit_total)
-    print("Male", frauds_total)
+    for t in target_values:
+        i = target_values.index(t)
+        print("Successful",t,"detection:",\
+            int(correct_target_counts[i] / max(1,total_target_counts[i]) *100),"%")
+    for t in target_values:
+        print(t,total_target_counts[target_values.index(t)])
     print(len(error_lines), "errors")
 
 
 if __name__ == "__main__":
 
     filename = "validation_set2"
-    attributes, validation_set_undersampled = parse_credits(
+    attributes, validation_set2 = parse_credits(
         "_Data_" + sep + filename + ".csv")
     import _Output_.training_set2_graphtree_generated as undersampled
 
