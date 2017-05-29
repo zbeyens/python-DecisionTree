@@ -1,0 +1,18 @@
+City,State,Year,Month,Incident,Crime Type,Crime Solved,Victim Age,Victim Race,Victim Ethnicity,Perpetrator Sex,Perpetrator Age,Perpetrator Race,Perpetrator Ethnicity,Relationship,Weapon,Victim Count,Perpetrator Count,Victim Sex
+Anchorage,Alaska,1980,January,1,Murder or Manslaughter,Yes,14,Native American/Alaska Native,Unknown,Male,15,Native American/Alaska Native,Unknown,Acquaintance,Blunt Object,0,0,Male
+Anchorage,Alaska,1980,March,1,Murder or Manslaughter,Yes,43,White,Unknown,Male,42,White,Unknown,Acquaintance,Strangulation,0,0,Male
+Anchorage,Alaska,1980,March,2,Murder or Manslaughter,No,30,Native American/Alaska Native,Unknown,Unknown,0,Unknown,Unknown,Unknown,Unknown,0,0,Female
+Anchorage,Alaska,1980,April,1,Murder or Manslaughter,Yes,43,White,Unknown,Male,42,White,Unknown,Acquaintance,Strangulation,0,0,Male
+Anchorage,Alaska,1980,April,2,Murder or Manslaughter,No,30,Native American/Alaska Native,Unknown,Unknown,0,Unknown,Unknown,Unknown,Unknown,0,1,Female
+Anchorage,Alaska,1980,May,1,Murder or Manslaughter,Yes,30,White,Unknown,Male,36,White,Unknown,Acquaintance,Rifle,0,0,Male
+Anchorage,Alaska,1980,May,2,Murder or Manslaughter,Yes,42,Native American/Alaska Native,Unknown,Male,27,Black,Unknown,Wife,Knife,0,0,Female
+Anchorage,Alaska,1980,June,1,Murder or Manslaughter,Yes,99,White,Unknown,Male,35,White,Unknown,Wife,Knife,0,0,Female
+Anchorage,Alaska,1980,June,2,Murder or Manslaughter,No,32,White,Unknown,Unknown,0,Unknown,Unknown,Unknown,Firearm,0,0,Male
+Anchorage,Alaska,1980,June,3,Murder or Manslaughter,Yes,38,White,Unknown,Male,40,Unknown,Unknown,Unknown,Firearm,0,1,Male
+Anchorage,Alaska,1980,July,1,Murder or Manslaughter,No,36,Native American/Alaska Native,Unknown,Unknown,0,Unknown,Unknown,Unknown,Unknown,0,1,Male
+Anchorage,Alaska,1980,July,2,Murder or Manslaughter,Yes,20,White,Unknown,Male,49,White,Unknown,Stranger,Shotgun,0,0,Male
+Anchorage,Alaska,1980,July,3,Murder or Manslaughter,Yes,36,Black,Unknown,Male,39,Black,Unknown,Girlfriend,Blunt Object,0,0,Female
+Anchorage,Alaska,1980,August,1,Murder or Manslaughter,Yes,20,Native American/Alaska Native,Unknown,Male,49,White,Unknown,Unknown,Fall,0,0,Male
+Anchorage,Alaska,1980,August,2,Murder or Manslaughter,No,48,White,Unknown,Unknown,0,Unknown,Unknown,Unknown,Handgun,0,0,Male
+Anchorage,Alaska,1980,August,3,Murder or Manslaughter,Yes,31,Black,Unknown,Female,29,Black,Unknown,Ex-Husband,Handgun,0,0,Male
+Anchorage,Alaska,1980,December,1,Murder or Manslaughter,Yes,16,Unknown,Unknown,Male,19,Unknown,Unknown,Acquaintance,Knife,0,0,Male
