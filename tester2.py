@@ -107,9 +107,18 @@ def test_tree(tree, classes, target, dataset):
 if __name__ == "__main__":
 
     filename = "validation_set2"
-    attributes, validation_set2 = parse_credits(
+    attributes, validation_set20 = parse_credits(
+        "_Data_" + sep + filename + ".csv")
+    filename = "training_set2_full"
+    attributes, validation_set80 = parse_credits(
         "_Data_" + sep + filename + ".csv")
     import _Output_.training_set2_graphtree_generated as undersampled
+    import _Output_.validation_set2_graphtree_generated as full20
+    import _Output_.training_set2_full_graphtree_generated as full80
 
-    print("Using undersampled tree (balanced) on extended data")
-    test_tree(undersampled.tree, attributes, "Victim Sex", validation_set2)
+    print("Using only 17 data to build the tree, tested on 80% of the data")
+    test_tree(undersampled.tree, attributes, "Victim Sex", validation_set80)
+    print("Using only 80% of the data to build the tree, tested on 20% of the data")
+    test_tree(full80.tree, attributes, "Victim Sex", validation_set20)
+    print("Using only 20% of the data to build the tree, tested on 80% of the data")
+    test_tree(full20.tree, attributes, "Victim Sex", validation_set80)

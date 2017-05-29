@@ -47,7 +47,7 @@ def drawtree(root, arrangement, value, prof, depth=0):
     if(isinstance(root, dict)):
         c = "black"
     else:
-        print(root)
+        #print(root)
         c = ["red", "green", "yellow", "blue"][TARGET_VALUES.index(root)]
     drawnode(arrangement, value, prof, c, depth)
     if(isinstance(root, dict)):
@@ -107,3 +107,10 @@ if __name__ == "__main__":
 
     import _Output_.training_set_graphtree_generated as id3
     start(id3.tree)
+
+    import _Output_.validation_set2_graphtree_generated as crimes20
+    start(crimes20.tree,("Female","Male","Unknown"),dimensions=(10000,3000))
+	
+    import _Output_.training_set2_full_graphtree_generated as crimes80
+    start(crimes80.tree,("Female","Male","Unknown"),dimensions=(20000,3000))
+	
